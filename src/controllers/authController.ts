@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
-import { create } from "../services/authServices.js";
+import { acess, create } from "../services/authServices.js";
 
-export function signup(req: Request, res: Response) {
-    try {
+export async function signup(req: Request, res: Response) {
         const user = req.body;
 
-        create(user);
+        await create(user);
         res.sendStatus(201);
-    } catch (error) {
-        res.sendStatus(500);
-    }
+}
 
+export async function signin(req: Request, res: Response) {
+    const loginData = req.body;
+
+    const token = await acess(loginData);
+    res.status(200).send(token);
 }

@@ -1,4 +1,3 @@
-import { userData } from './../types/authTypes.js';
 import { authSchema } from '../schemas/authSchema.js';
 import { Request, Response, NextFunction } from 'express';
 

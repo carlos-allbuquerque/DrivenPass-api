@@ -8,9 +8,21 @@ export async function createUser(user: userData) {
 }
 
 export async function search(email: string) {
-    return await prisma.user.findUnique({
+    const result = await prisma.user.findUnique({
         where: {
             email
         },
     });
+    return result;
 }
+
+// export async function getUserId(email: string) {
+//     const result = await prisma.user.findFirst({
+//         where: { 
+//             email 
+//         }
+//     });
+//     console.log(result);
+
+//     return result.id;
+// }
