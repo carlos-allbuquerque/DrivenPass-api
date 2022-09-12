@@ -1,7 +1,7 @@
 import { createCredential, getEspecificUserCredential, getUserCredentials, searchCredential } from "../repositories/credentialRepository.js";
 import { CredentialData } from "../types/credentialType.js";
 import error from "../types/errorType.js";
-import { encryptAddedPassword } from "../utils/passwordUtils.js";
+import { decryptAddedPassword, encryptAddedPassword } from "../utils/passwordUtils.js";
 
 export async function create(credentialData: CredentialData) {
     const alreadyExistsInUser = await searchCredential(credentialData.title, credentialData.userId);
@@ -13,10 +13,12 @@ export async function create(credentialData: CredentialData) {
 
 export async function getCredentials(userId: number) {
     const userCredentials = await getUserCredentials(userId);
-    if (userCredentials.length === 0) {
+    if (!userCredentials) {
        throw <error>{code: "notFound", message: "User does not have any credentials registered in the system"} 
     } 
-    return userCredentials;
+    const newList = [];
+    userCredentials.forEach(item => newList.push({...item, password: decryptAddedPassword(item.password)}))
+    return newList;
 }
 
 export async function getCredential(credentialId: number, userId: number) {
@@ -24,5 +26,7 @@ export async function getCredential(credentialId: number, userId: number) {
     if (!credential) {
         throw <error>{code: "notFound", message: "the user does not own any credentials whith the informed id"}
     } 
-    return credential;
+
+    const decrypted = decryptAddedPassword(credential.password);
+    return { ... credential, password: decrypted};
 }

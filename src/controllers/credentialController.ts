@@ -20,7 +20,7 @@ export async function getAllCredentials(req: Request, res: Response) {
 
 export async function getCredentialsById(req: Request, res: Response) {
     const { credentialId } = req.params;
-    const userId = req.body;
+    const { userId } = req.body;
     const numberUserId = parseInt(userId);
     const numberCredentialId = parseInt(credentialId);
     const credential = await getCredential(numberCredentialId, numberUserId);

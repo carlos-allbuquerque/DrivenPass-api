@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { NewExpression } from 'typescript';
-import { credentialSchema } from "../schemas/passwordsSchemas";
+import { credentialSchema } from "../schemas/passwordsSchemas.js";
 
 
 export function validateCredentialData(req: Request, res: Response, next: NextFunction) {

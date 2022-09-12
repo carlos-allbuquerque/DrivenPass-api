@@ -29,6 +29,6 @@ export async function getEspecificUserCredential(credentialId: number, userId: n
         where: {
             id: credentialId,
             userId
-        }
-    })
+        },
+    });
 }
