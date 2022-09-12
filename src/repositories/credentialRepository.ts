@@ -15,3 +15,20 @@ export async function searchCredential(title: string, userId: number) {
         },
     });
 }
+
+export async function getUserCredentials(userId: number) {
+    return await prisma.credentials.findMany({
+        where: {
+            userId
+        },
+    });
+}
+
+export async function getEspecificUserCredential(credentialId: number, userId: number) {
+    return await prisma.credentials.findFirst({
+        where: {
+            id: credentialId,
+            userId
+        }
+    })
+}
