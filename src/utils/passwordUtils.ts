@@ -10,7 +10,10 @@ export function encryptAccountPassword(password: string) {
   return bcrypt.hashSync(password, 10);
 }
 
-export function decryptAccountPassword(password: string, encryptedPassword: string) {
+export function decryptAccountPassword(
+  password: string,
+  encryptedPassword: string
+) {
   return bcrypt.compareSync(password, encryptedPassword);
 }
 
@@ -21,4 +24,3 @@ export function decryptAddedPassword(encryptedSecurityCode: string) {
 export function encryptAddedPassword(password: string) {
   return cryptr.encrypt(password);
 }
-
