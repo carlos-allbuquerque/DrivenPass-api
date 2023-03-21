@@ -1,11 +1,12 @@
-import Joi from "joi";
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
+import { ObjectSchema } from "joi";
 
-export function validateSchema(schema: Joi.ObjectSchema) {
-  return async (req: Request, _res: Response, next: NextFunction) => {
+export function validateSchemaMiddleware(schema: ObjectSchema) {
+  return (req: Request, res: Response, next: NextFunction) => {
     const validation = schema.validate(req.body, { abortEarly: false });
-    if (validation.error)
-      throw { type: "wrong_schema", message: validation.error.message };
+    if (validation.error) {
+      return res.status(422).send({ error: validation.error.message });
+    }
 
     next();
   };
