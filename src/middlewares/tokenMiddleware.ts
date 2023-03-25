@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import dotenv from "dotenv";
+import { unauthorizedError } from "../utils/errorUtils.js";
 
 dotenv.config();
 
@@ -16,6 +17,6 @@ export default function validateToken(
     const dados = jwt.verify(token, process.env.JWT_SECRET);
     next();
   } catch (error) {
-    throw { code: "unauthorized", message: "Token inválido ou adulterado" };
+    throw unauthorizedError("Invalid or tampered token");
   }
 }
