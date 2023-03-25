@@ -1,4 +1,3 @@
-import { credentialSchema } from "./../schemas/passwordsSchemas";
 import { Request, Response } from "express";
 import { create, getCredential } from "../services/credentialService.js";
 import { getCredentials } from "../services/credentialService.js";
