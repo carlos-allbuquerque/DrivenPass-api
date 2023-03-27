@@ -1,7 +1,11 @@
 import * as M from "../repositories/credentialRepository.js";
 import { CredentialData } from "../types/credentialType.js";
 import * as U from "../utils/passwordUtils.js";
-import { conflictError, notFoundError } from "../utils/errorUtils.js";
+import {
+  conflictError,
+  notFoundError,
+  unauthorizedError,
+} from "../utils/errorUtils.js";
 
 export async function create(credentialData: CredentialData) {
   const alreadyExistsInUser = await M.searchCredential(
@@ -44,7 +48,10 @@ export async function getCredential(credentialId: number, userId: number) {
   return { ...credential, password: decrypted };
 }
 
-export async function removeCredential(id: number) {
+export async function removeCredential(id: number, userId: number) {
+  const userHasCredential = M.getEspecificUserCredential(id, userId);
+  if (!userHasCredential) {
+    throw unauthorizedError();
+  }
   const credential = await M.removeCredential(id);
-  if (!credential) throw notFoundError("credential not found");
 }
