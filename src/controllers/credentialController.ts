@@ -32,10 +32,8 @@ export async function getCredentialsById(req: Request, res: Response) {
 export async function deleteCredential(req: Request, res: Response) {
   const credentialId = parseInt(req.params.id);
   if (isNaN(credentialId)) res.sendStatus(422);
-
   const { userId } = req.body;
-
   await credentialService.removeCredential(credentialId, userId);
-
+  
   return res.sendStatus(200);
 }
