@@ -13,7 +13,7 @@ export async function create(credentialData: CredentialData) {
     credentialData.userId
   );
   if (alreadyExistsInUser)
-    throw conflictError("The user already has a credential with this title");
+    throw conflictError("Title already in use");
   const encryptedPassword = U.encryptAddedPassword(credentialData.password);
 
   return await M.createCredential({
@@ -26,7 +26,7 @@ export async function getCredentials(userId: number) {
   const userCredentials = await M.getUserCredentials(userId);
   if (!userCredentials) {
     throw notFoundError(
-      "the user does not have any credentials registered in the system"
+      "The user doesn't have any credentials"
     );
   }
   const newList = [];
@@ -40,7 +40,7 @@ export async function getCredential(credentialId: number, userId: number) {
   const credential = await M.getEspecificUserCredential(credentialId, userId);
   if (!credential) {
     throw notFoundError(
-      "the user does not own any credentials whith the informed id"
+      "Credential not found"
     );
   }
 
@@ -49,9 +49,8 @@ export async function getCredential(credentialId: number, userId: number) {
 }
 
 export async function removeCredential(id: number, userId: number) {
-  const userHasCredential = M.getEspecificUserCredential(id, userId);
-  if (!userHasCredential) {
-    throw unauthorizedError();
-  }
-  const credential = await M.removeCredential(id);
+  if (!userId) throw notFoundError("Credential not found");
+
+  await getCredential(id, userId);
+  await M.removeCredential(id);
 }
