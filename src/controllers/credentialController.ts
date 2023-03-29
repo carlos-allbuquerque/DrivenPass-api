@@ -9,21 +9,18 @@ export async function createCredentials(req: Request, res: Response) {
 }
 
 export async function getAllCredentials(req: Request, res: Response) {
-  const { userId } = req.params;
-  const numberId = parseInt(userId);
-  const credentials = await credentialService.getCredentials(numberId);
+  const userId = parseInt(req.params.userId);
+  const credentials = await credentialService.getCredentials(userId);
 
   return res.status(200).send(credentials);
 }
 
 export async function getCredentialsById(req: Request, res: Response) {
-  const { credentialId } = req.params;
-  const { userId } = req.body;
-  const numberUserId = parseInt(userId);
-  const numberCredentialId = parseInt(credentialId);
+  const credentialId = parseInt(req.params.credentialId);
+  const { user } = req.body;
   const credential = await credentialService.getCredential(
-    numberCredentialId,
-    numberUserId
+    credentialId,
+    user.id
   );
 
   return res.status(200).send(credential);
@@ -31,9 +28,11 @@ export async function getCredentialsById(req: Request, res: Response) {
 
 export async function deleteCredential(req: Request, res: Response) {
   const credentialId = parseInt(req.params.id);
-  if (isNaN(credentialId)) res.sendStatus(422);
-  const { userId } = req.body;
-  await credentialService.removeCredential(credentialId, userId);
-  
+  if (isNaN(credentialId)) {
+    res.sendStatus(422);
+  }
+  const { user } = res.locals;
+  await credentialService.removeCredential(credentialId, user.id);
+
   return res.sendStatus(200);
 }
