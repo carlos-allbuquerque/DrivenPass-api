@@ -18,6 +18,7 @@ model User {
   notes       Notes[]
   wifi        Wifi[]
   credentials Credentials[]
+  card        Card[]
   createdAt   DateTime     @default(now())
 
   @@map("users")
@@ -41,6 +42,24 @@ model Notes {
   content     String       
   user        User         @relation(fields: [userId], references: [id])
   createdAt   DateTime     @default(now())
+}
+
+model Card {
+  id             Int     @id @default(autoincrement())
+  user           User    @relation(fields: [userId], references: [id])
+  title          String
+  number         String
+  cardHolderName String
+  securityCode   String
+  expirationDate String
+  password       String
+  isVirtual      Boolean
+  type           String
+
+  userId Int
+
+  @@unique([title, userId])
+  @@map("creditCards")
 }
 
 model Wifi {
