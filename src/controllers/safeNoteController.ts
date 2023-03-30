@@ -6,7 +6,7 @@ export async function createSafeNote(req: Request, res: Response) {
   const safeNote = req.body;
 
   await safeNoteService.createSafeNote(user, safeNote);
-  res.sendStatus(201);
+  res.sendStatus(201); // created
 }
 
 export async function getAllUserSafeNotes(req: Request, res: Response) {
@@ -19,6 +19,9 @@ export async function getAllUserSafeNotes(req: Request, res: Response) {
 export async function getSafeNote(req: Request, res: Response) {
   const { user } = res.locals;
   const safeNoteId = parseInt(req.params.safeNoteId);
+  if (isNaN(safeNoteId)) {
+    res.sendStatus(422); // unprocessable entity
+  }
   const safeNote = await safeNoteService.getSafeNote(user, safeNoteId);
 
   res.send(safeNote).status(200);
