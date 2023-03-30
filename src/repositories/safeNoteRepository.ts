@@ -6,12 +6,18 @@ export async function createSafeNote(
   safeNote: createSafeNoteData
 ) {
   return await prisma.safeNote.create({
-    data: { ...safeNote, userId },
+    data: { ...safeNote, userId }
   });
 }
 
 export async function getSafeNoteByTitle(userId: number, title: string) {
   return await prisma.safeNote.findFirst({
-    where: { userId, title },
+    where: { userId, title }
+  });
+}
+
+export async function getAll(userId: number) {
+  return await prisma.safeNote.findMany({
+    where: { userId }
   });
 }

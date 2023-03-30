@@ -1,6 +1,6 @@
 import * as safeNoteRepository from "./../repositories/safeNoteRepository.js";
 import { createSafeNoteData } from "../types/safeNoteType.js";
-import { conflictError } from "../utils/errorUtils.js";
+import { conflictError, unauthorizedError } from "../utils/errorUtils.js";
 import { User } from "@prisma/client";
 
 export async function createSafeNote(user: User, safeNote: createSafeNoteData) {
@@ -12,4 +12,8 @@ export async function createSafeNote(user: User, safeNote: createSafeNoteData) {
   if (titleAlreadyInUse) throw conflictError("Title already in use");
 
   await safeNoteRepository.createSafeNote(userId, safeNote);
+}
+
+export async function getAllUserSafeNotes(userId: number) {
+  return await safeNoteRepository.getAll(userId);
 }
