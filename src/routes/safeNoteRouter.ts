@@ -1,7 +1,8 @@
 import { Router } from "express";
 import {
   createSafeNote,
-  getAllUserSafeNotes
+  getAllUserSafeNotes,
+  getSafeNote,
 } from "./../controllers/safeNoteController.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
@@ -17,5 +18,6 @@ safeNoteRouter.post(
   createSafeNote
 );
 safeNoteRouter.get("/safenotes", getAllUserSafeNotes);
+safeNoteRouter.get("/safenote/:safeNoteId", getSafeNote);
 
 export default safeNoteRouter;

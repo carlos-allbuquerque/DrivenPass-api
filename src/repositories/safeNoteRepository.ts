@@ -21,3 +21,9 @@ export async function getAll(userId: number) {
     where: { userId }
   });
 }
+
+export async function getSafeNote(safeNoteId: number, userId: number) {
+  return await prisma.safeNote.findFirst({
+    where: { id: safeNoteId, userId }
+  });
+}
