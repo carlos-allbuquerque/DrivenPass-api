@@ -27,3 +27,9 @@ export async function getSafeNote(safeNoteId: number, userId: number) {
     where: { id: safeNoteId, userId }
   });
 }
+
+export async function removeSafeNote(id: number) {
+  return await prisma.safeNote.delete({
+    where: { id }
+  });
+}

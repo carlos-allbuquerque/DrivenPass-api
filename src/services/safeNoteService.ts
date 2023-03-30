@@ -24,3 +24,8 @@ export async function getSafeNote(user: User, safeNoteId: number) {
 
   return safeNote;
 }
+
+export async function removeSafeNote(user: User, safeNoteId: number) {
+  await getSafeNote(user, safeNoteId);
+  await safeNoteRepository.removeSafeNote(safeNoteId);
+}

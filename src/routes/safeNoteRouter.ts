@@ -3,6 +3,7 @@ import {
   createSafeNote,
   getAllUserSafeNotes,
   getSafeNote,
+  removeSafeNote
 } from "./../controllers/safeNoteController.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
@@ -19,5 +20,6 @@ safeNoteRouter.post(
 );
 safeNoteRouter.get("/safenotes", getAllUserSafeNotes);
 safeNoteRouter.get("/safenote/:safeNoteId", getSafeNote);
+safeNoteRouter.delete("/safenote/:id", removeSafeNote);
 
 export default safeNoteRouter;
