@@ -49,8 +49,6 @@ export async function getCredential(credentialId: number, userId: number) {
 }
 
 export async function removeCredential(id: number, userId: number) {
-  if (!userId) throw notFoundError("Credential not found");
-
   await getCredential(id, userId);
   await M.removeCredential(id);
 }
