@@ -17,14 +17,14 @@ model User {
   password    String
   SafeNote    SafeNote[]
   wifi        Wifi[]
-  credentials Credentials[]
+  credential Credential[]
   card        Card[]
   createdAt   DateTime     @default(now())
 
   @@map("users")
 }
 
-model Credentials {
+model Credential {
   id          Int          @id @default(autoincrement())
   userId      Int
   title       String
@@ -33,6 +33,9 @@ model Credentials {
   password    String 
   user        User         @relation(fields: [userId], references: [id])
   createdAt   DateTime     @default(now())
+
+  @@unique([title, userId])
+  @@map("credentials")
 }
 
 model SafeNote {
