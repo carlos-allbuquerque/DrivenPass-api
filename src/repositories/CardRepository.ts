@@ -12,3 +12,9 @@ export async function getCardByTitle(userId: number, title: string) {
     where: { userId, title }
   });
 }
+
+export async function getAll(userId: number) {
+  return await prisma.card.findMany({
+    where: { userId }
+  });
+}

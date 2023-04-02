@@ -6,7 +6,7 @@ import { encryptAddedPassword } from "../utils/passwordUtils.js";
 
 export async function createCard(user: User, card: createCardData) {
   const titleInUse = await cardRepository.getCardByTitle(user.id, card.title);
-  if (titleInUse) throw conflictError("Name already in use");
+  if (titleInUse) throw conflictError("Title already in use");
 
   const cardData: createCardData = {
     ...card,
@@ -15,4 +15,8 @@ export async function createCard(user: User, card: createCardData) {
   };
 
   await cardRepository.createCard(user.id, cardData);
+}
+
+export async function getAllUserCards(userId: number) {
+  return await cardRepository.getAll(userId);
 }
