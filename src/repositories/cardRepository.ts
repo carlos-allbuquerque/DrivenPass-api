@@ -18,3 +18,9 @@ export async function getAll(userId: number) {
     where: { userId }
   });
 }
+
+export async function getCard(userId: number, cardId: number) {
+  return await prisma.card.findFirst({
+    where: { userId, id: cardId }
+  });
+}
