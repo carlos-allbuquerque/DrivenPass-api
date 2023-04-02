@@ -28,3 +28,8 @@ export async function getCard(user: User, cardId: number) {
 
   return card;
 }
+
+export async function removeCard(user: User, cardId: number) {
+  await getCard(user, cardId);
+  await cardRepository.removeCard(cardId);
+}
