@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { createCard, getAllUserCards } from "../controllers/cardController.js";
+import {
+  createCard,
+  getAllUserCards,
+  getCard,
+} from "../controllers/cardController.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import { cardSchema } from "../schemas/cardSchema.js";
@@ -10,5 +14,6 @@ cardRouter.use(validateToken);
 
 cardRouter.post("/cards", validateSchemaMiddleware(cardSchema), createCard);
 cardRouter.get("/cards", getAllUserCards);
+cardRouter.get("/cards/:id", getCard);
 
 export default cardRouter;
