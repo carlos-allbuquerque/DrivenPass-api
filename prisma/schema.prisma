@@ -16,7 +16,7 @@ model User {
   email       String       @unique
   password    String
   SafeNote    SafeNote[]
-  wifi        Wifi[]
+  Network     Network[]
   credential Credential[]
   card        Card[]
   createdAt   DateTime     @default(now())
@@ -68,7 +68,7 @@ model Card {
   @@map("creditCards")
 }
 
-model Wifi {
+model Network {
   id        Int            @id @default(autoincrement())
   userId    Int
   title     String
@@ -76,4 +76,6 @@ model Wifi {
   password  String
   user      User           @relation(fields: [userId], references: [id])
   createdAt DateTime       @default(now())
+
+  @@map("networks")
 }
