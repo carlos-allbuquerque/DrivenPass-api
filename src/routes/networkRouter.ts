@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { createNetwork } from "../controllers/networkController.js";
+import {
+  createNetwork,
+  getAllUserNetworks
+} from "../controllers/networkController.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import { networkSchema } from "../schemas/networkSchema.js";
@@ -13,5 +16,6 @@ networkRouter.post(
   validateSchemaMiddleware(networkSchema),
   createNetwork
 );
+networkRouter.get("/networks", getAllUserNetworks);
 
 export default networkRouter;

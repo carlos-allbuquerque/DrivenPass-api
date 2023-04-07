@@ -6,6 +6,12 @@ export async function createNetwork(
   network: createNetworkData
 ) {
   return await prisma.network.create({
-    data: { ...network, userId },
+    data: { ...network, userId }
   });
+}
+
+export async function getAll(userId: number) {
+  return prisma.network.findMany({
+    where: { userId },
+  })
 }
