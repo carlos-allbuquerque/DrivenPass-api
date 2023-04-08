@@ -12,6 +12,17 @@ export async function createNetwork(req: Request, res: Response) {
 export async function getAllUserNetworks(req: Request, res: Response) {
   const { user } = res.locals;
   const network = await networkService.getAllUserNetworks(user.id);
-  
+
   res.status(200).send(network);
+}
+
+export async function getNetwork(req: Request, res: Response) {
+  const { user } = res.locals;
+  const networkId = parseInt(req.params.networkId);
+  if (isNaN(networkId)) {
+    res.sendStatus(422); // unprocessable entity
+  }
+
+  const network = await networkService.getNetwork(user, networkId);
+  res.send(network).status(200);
 }
