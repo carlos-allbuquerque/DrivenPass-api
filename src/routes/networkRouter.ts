@@ -2,7 +2,8 @@ import { Router } from "express";
 import {
   createNetwork,
   getAllUserNetworks,
-  getNetwork
+  getNetwork,
+  removeNetwork
 } from "../controllers/networkController.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
@@ -19,5 +20,6 @@ networkRouter.post(
 );
 networkRouter.get("/networks", getAllUserNetworks);
 networkRouter.get("/networks/:networkId", getNetwork);
+networkRouter.delete("/networks/:networkId", removeNetwork);
 
 export default networkRouter;

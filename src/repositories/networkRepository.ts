@@ -21,3 +21,9 @@ export async function getNetwork(userId: number, networkId: number) {
     where: { userId, id: networkId }
   });
 }
+
+export async function removeNetwork(id: number) {
+  return prisma.network.delete({
+    where: { id }
+  });
+}

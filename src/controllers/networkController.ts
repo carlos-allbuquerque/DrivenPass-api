@@ -26,3 +26,14 @@ export async function getNetwork(req: Request, res: Response) {
   const network = await networkService.getNetwork(user, networkId);
   res.send(network).status(200);
 }
+
+export async function removeNetwork(req: Request, res: Response) {
+  const { user } = res.locals;
+  const networkId = parseInt(req.params.networkId);
+  if (isNaN(networkId)) {
+    res.sendStatus(422); // unprocessable entity
+  }
+
+  await networkService.removeNetwork(user, networkId);
+  res.sendStatus(200);
+}
