@@ -13,17 +13,14 @@ credentialRouter.post(
   validateSchemaMiddleware(credentialSchema),
   credentialController.createCredentials
 );
-
 credentialRouter.get(
   "/credentials",
   credentialController.getAllCredentials
 );
-
 credentialRouter.get(
   "/credentials/:id",
   credentialController.getCredential
 );
-
 credentialRouter.delete(
   "/credentials/:id",
   credentialController.deleteCredential
