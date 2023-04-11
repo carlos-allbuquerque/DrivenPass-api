@@ -2,8 +2,7 @@ import { User } from "@prisma/client";
 import * as cardRepository from "../repositories/cardRepository.js";
 import { createCardData } from "../types/CardType.js";
 import { conflictError, notFoundError } from "../utils/errorUtils.js";
-import { encryptAddedPassword } from "../utils/passwordUtils.js";
-import { not } from "joi";
+import { decryptAddedPassword, encryptAddedPassword } from "../utils/passwordUtils.js";
 
 export async function createCard(user: User, card: createCardData) {
   const titleInUse = await cardRepository.getCardByTitle(user.id, card.title);
@@ -19,14 +18,25 @@ export async function createCard(user: User, card: createCardData) {
 }
 
 export async function getAllUserCards(userId: number) {
-  return await cardRepository.getAll(userId);
+  const cards = await cardRepository.getAll(userId);
+  return cards.map(card => {
+    return {
+      ...card,
+      password: decryptAddedPassword(card.password),
+      securityCode: decryptAddedPassword(card.securityCode)
+    };
+  });
 }
 
 export async function getCard(user: User, cardId: number) {
   const card = await cardRepository.getCard(user.id, cardId);
-  if (!card) throw notFoundError("Card not found");
+  if (!card) throw notFoundError("Card doesn't exist");
 
-  return card;
+  return {
+    ...card,
+    password: decryptAddedPassword(card.password),
+    securityCode: decryptAddedPassword(card.securityCode)
+  };
 }
 
 export async function removeCard(user: User, cardId: number) {
