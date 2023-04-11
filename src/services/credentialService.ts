@@ -25,9 +25,7 @@ export async function create(credential: createCredentialData, user: User) {
 
 export async function getCredentials(userId: number) {
   const credentials = await credentialRepository.getUserCredentials(userId);
-  if (!credentials) {
-    throw notFoundError("The user doesn't have any credentials");
-  }
+  
   return credentials.map((credential) => {
     const { password } = credential;
     return { ...credential, password: decryptAddedPassword(password) };

@@ -4,29 +4,29 @@ import { credentialSchema } from "../schemas/passwordsSchemas.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 
-const credentialsRouter = Router();
+const credentialRouter = Router();
 
-credentialsRouter.use(validateToken);
+credentialRouter.use(validateToken);
 
-credentialsRouter.post(
+credentialRouter.post(
   "/credentials",
   validateSchemaMiddleware(credentialSchema),
   C.createCredentials
 );
 
-credentialsRouter.get(
-  "/credentials/:userId",
+credentialRouter.get(
+  "/credentials",
   C.getAllCredentials
 );
 
-credentialsRouter.get(
+credentialRouter.get(
   "/credential/:credentialId",
   C.getCredentialsById
 );
 
-credentialsRouter.delete(
+credentialRouter.delete(
   "/credential/:id",
   C.deleteCredential
 );
 
-export default credentialsRouter;
+export default credentialRouter;

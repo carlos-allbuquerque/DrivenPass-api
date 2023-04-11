@@ -1,6 +1,6 @@
 import { Router } from "express";
 import authRouter from "./authRouter.js";
-import credentialsRouter from "./credentialsRouter.js";
+import credentialsRouter from "./credentialRouter.js";
 import safeNoteRouter from "./safeNoteRouter.js";
 import cardRouter from "./cardRouter.js";
 import networkRouter from "./networkRouter.js";
