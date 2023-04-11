@@ -1,10 +1,12 @@
 import * as credentialRepository from "../repositories/credentialRepository.js";
 import { CredentialData } from "../types/credentialType.js";
-import * as U from "../utils/passwordUtils.js";
+import { 
+  encryptAddedPassword,
+  decryptAddedPassword 
+} from "../utils/passwordUtils.js";
 import {
   conflictError,
-  notFoundError,
-  unauthorizedError,
+  notFoundError
 } from "../utils/errorUtils.js";
 
 export async function create(credentialData: CredentialData) {
@@ -14,26 +16,25 @@ export async function create(credentialData: CredentialData) {
   );
   if (alreadyExistsInUser)
     throw conflictError("Title already in use");
-  const encryptedPassword = U.encryptAddedPassword(credentialData.password);
+  const encryptedPassword = encryptAddedPassword(credentialData.password);
 
-  return await credentialRepository.createCredential({
+  await credentialRepository.createCredential({
     ...credentialData,
     password: encryptedPassword,
   });
 }
 
 export async function getCredentials(userId: number) {
-  const userCredentials = await credentialRepository.getUserCredentials(userId);
-  if (!userCredentials) {
+  const credentials = await credentialRepository.getUserCredentials(userId);
+  if (!credentials) {
     throw notFoundError(
       "The user doesn't have any credentials"
     );
   }
-  const newList = [];
-  userCredentials.forEach((item) =>
-    newList.push({ ...item, password: U.decryptAddedPassword(item.password) })
-  );
-  return newList;
+  return credentials.map(credential => {
+    const { password } = credential;
+    return { ...credential, password: decryptAddedPassword(password) };
+  });
 }
 
 export async function getCredential(credentialId: number, userId: number) {
@@ -44,7 +45,7 @@ export async function getCredential(credentialId: number, userId: number) {
     );
   }
 
-  const decrypted = U.decryptAddedPassword(credential.password);
+  const decrypted = decryptAddedPassword(credential.password);
   return { ...credential, password: decrypted };
 }
 
