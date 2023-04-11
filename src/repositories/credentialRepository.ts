@@ -27,7 +27,7 @@ export async function getUserCredentials(userId: number) {
   return await prisma.credential.findMany({ where: { userId } });
 }
 
-export async function getEspecificUserCredential(
+export async function getCredential(
   credentialId: number,
   userId: number
 ) {
@@ -35,7 +35,7 @@ export async function getEspecificUserCredential(
     where: {
       id: credentialId,
       userId
-    },
+    }
   });
 }
 

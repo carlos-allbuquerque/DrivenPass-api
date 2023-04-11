@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as C from "../controllers/credentialController.js";
+import * as credentialController from "../controllers/credentialController.js";
 import { credentialSchema } from "../schemas/passwordsSchemas.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
@@ -11,22 +11,22 @@ credentialRouter.use(validateToken);
 credentialRouter.post(
   "/credentials",
   validateSchemaMiddleware(credentialSchema),
-  C.createCredentials
+  credentialController.createCredentials
 );
 
 credentialRouter.get(
   "/credentials",
-  C.getAllCredentials
+  credentialController.getAllCredentials
 );
 
 credentialRouter.get(
-  "/credential/:credentialId",
-  C.getCredentialsById
+  "/credentials/:id",
+  credentialController.getCredential
 );
 
 credentialRouter.delete(
-  "/credential/:id",
-  C.deleteCredential
+  "/credentials/:id",
+  credentialController.deleteCredential
 );
 
 export default credentialRouter;

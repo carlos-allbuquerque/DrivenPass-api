@@ -25,7 +25,7 @@ export async function create(credential: createCredentialData, user: User) {
 
 export async function getCredentials(userId: number) {
   const credentials = await credentialRepository.getUserCredentials(userId);
-  
+
   return credentials.map((credential) => {
     const { password } = credential;
     return { ...credential, password: decryptAddedPassword(password) };
@@ -33,7 +33,7 @@ export async function getCredentials(userId: number) {
 }
 
 export async function getCredential(credentialId: number, userId: number) {
-  const credential = await credentialRepository.getEspecificUserCredential(
+  const credential = await credentialRepository.getCredential(
     credentialId,
     userId
   );
