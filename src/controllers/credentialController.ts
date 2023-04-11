@@ -3,21 +3,22 @@ import * as credentialService from "../services/credentialService.js";
 
 export async function createCredentials(req: Request, res: Response) {
   const credential = req.body;
+  const { user } = res.locals; 
 
-  await credentialService.create(credential);
+  await credentialService.create(credential, user);
   return res.sendStatus(201);
 }
 
 export async function getAllCredentials(req: Request, res: Response) {
-  const userId = parseInt(req.params.userId);
-  const credentials = await credentialService.getCredentials(userId);
+  const { user } = res.locals;
+  const credentials = await credentialService.getCredentials(user.id);
 
   return res.status(200).send(credentials);
 }
 
 export async function getCredentialsById(req: Request, res: Response) {
   const credentialId = parseInt(req.params.credentialId);
-  const { user } = req.body;
+  const { user } = res.locals;
   const credential = await credentialService.getCredential(
     credentialId,
     user.id
