@@ -1,8 +1,7 @@
 import Joi from "joi";
-import { CredentialData } from "../types/credentialType";
+import { createCredentialData } from "../types/credentialType";
 
-export const credentialSchema = Joi.object<CredentialData>({
-  userId: Joi.number().required(),
+export const credentialSchema = Joi.object<createCredentialData>({
   title: Joi.string().required(),
   url: Joi.string().required(),
   username: Joi.string().required(),

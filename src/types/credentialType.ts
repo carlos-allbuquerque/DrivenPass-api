@@ -1,3 +1,3 @@
 import { Credential } from "@prisma/client";
 
-export type CredentialData = Omit<Credential, "id" | "createdAt">;
+export type createCredentialData = Omit<Credential, "id" | "createdAt" | "userId">;

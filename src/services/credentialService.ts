@@ -1,50 +1,47 @@
 import * as credentialRepository from "../repositories/credentialRepository.js";
-import { CredentialData } from "../types/credentialType.js";
-import * as U from "../utils/passwordUtils.js";
+import { createCredentialData } from "../types/credentialType.js";
 import {
-  conflictError,
-  notFoundError,
-  unauthorizedError,
-} from "../utils/errorUtils.js";
+  encryptAddedPassword,
+  decryptAddedPassword,
+} from "../utils/passwordUtils.js";
+import { conflictError, notFoundError } from "../utils/errorUtils.js";
+import { User } from "@prisma/client";
 
-export async function create(credentialData: CredentialData) {
-  const alreadyExistsInUser = await credentialRepository.searchCredential(
-    credentialData.title,
-    credentialData.userId
+export async function create(credential: createCredentialData, user: User) {
+  const titleInUse = await credentialRepository.getCredentialByTitle(
+    user.id,
+    credential.title
   );
-  if (alreadyExistsInUser)
-    throw conflictError("Title already in use");
-  const encryptedPassword = U.encryptAddedPassword(credentialData.password);
+  if (titleInUse) throw conflictError("Title already in use");
 
-  return await credentialRepository.createCredential({
-    ...credentialData,
-    password: encryptedPassword,
-  });
+  const credencialPassword = credential.password;
+  const credentialInfos = {
+    ...credential,
+    password: encryptAddedPassword(credencialPassword)
+  };
+
+  await credentialRepository.createCredential(credentialInfos, user.id);
 }
 
 export async function getCredentials(userId: number) {
-  const userCredentials = await credentialRepository.getUserCredentials(userId);
-  if (!userCredentials) {
-    throw notFoundError(
-      "The user doesn't have any credentials"
-    );
-  }
-  const newList = [];
-  userCredentials.forEach((item) =>
-    newList.push({ ...item, password: U.decryptAddedPassword(item.password) })
-  );
-  return newList;
+  const credentials = await credentialRepository.getUserCredentials(userId);
+
+  return credentials.map((credential) => {
+    const { password } = credential;
+    return { ...credential, password: decryptAddedPassword(password) };
+  });
 }
 
 export async function getCredential(credentialId: number, userId: number) {
-  const credential = await credentialRepository.getEspecificUserCredential(credentialId, userId);
+  const credential = await credentialRepository.getCredential(
+    credentialId,
+    userId
+  );
   if (!credential) {
-    throw notFoundError(
-      "Credential not found"
-    );
+    throw notFoundError("Credential not found");
   }
 
-  const decrypted = U.decryptAddedPassword(credential.password);
+  const decrypted = decryptAddedPassword(credential.password);
   return { ...credential, password: decrypted };
 }
 

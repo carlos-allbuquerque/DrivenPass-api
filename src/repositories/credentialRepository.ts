@@ -1,16 +1,25 @@
 import { prisma } from "../db/db.js";
-import { CredentialData } from "../types/credentialType";
+import { createCredentialData } from "../types/credentialType";
 
-export async function createCredential(credential: CredentialData) {
-  return await prisma.credential.create({ data: credential });
+export async function createCredential(
+  credential: createCredentialData,
+  userId: number
+) {
+  return await prisma.credential.create({
+    data: { ...credential, userId },
+  });
+}
+
+export async function getCredentialByTitle(userId: number, title: string) {
+  return prisma.credential.findFirst({
+    where: { userId, title },
+  });
 }
 
 export async function searchCredential(title: string, userId: number) {
   return await prisma.credential.findFirst({
     where: {
-      title,
-      userId,
-    },
+      title, userId }
   });
 }
 
@@ -18,15 +27,15 @@ export async function getUserCredentials(userId: number) {
   return await prisma.credential.findMany({ where: { userId } });
 }
 
-export async function getEspecificUserCredential(
+export async function getCredential(
   credentialId: number,
   userId: number
 ) {
   return await prisma.credential.findFirst({
     where: {
       id: credentialId,
-      userId,
-    },
+      userId
+    }
   });
 }
 
