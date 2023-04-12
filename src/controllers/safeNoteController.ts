@@ -18,7 +18,7 @@ export async function getAllUserSafeNotes(req: Request, res: Response) {
 
 export async function getSafeNote(req: Request, res: Response) {
   const { user } = res.locals;
-  const safeNoteId = parseInt(req.params.safeNoteId);
+  const safeNoteId = parseInt(req.params.id);
   if (isNaN(safeNoteId)) {
     res.sendStatus(422); // unprocessable entity
   }
