@@ -14,12 +14,12 @@ const safeNoteRouter = Router();
 safeNoteRouter.use(validateToken);
 
 safeNoteRouter.post(
-  "/safenotes/",
+  "/safenotes",
   validateSchemaMiddleware(safeNoteSchema),
   createSafeNote
 );
 safeNoteRouter.get("/safenotes", getAllUserSafeNotes);
-safeNoteRouter.get("/safenote/:safeNoteId", getSafeNote);
-safeNoteRouter.delete("/safenote/:id", removeSafeNote);
+safeNoteRouter.get("/safenotes/:id", getSafeNote);
+safeNoteRouter.delete("/safenotes/:id", removeSafeNote);
 
 export default safeNoteRouter;
