@@ -5,7 +5,7 @@ export async function createDocument(
   userId: number,
   document: createDocumentData
 ) {
-  await prisma.document.create({
+  return await prisma.document.create({
     data: { ...document, userId },
   });
 }

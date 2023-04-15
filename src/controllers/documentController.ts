@@ -6,6 +6,6 @@ export async function createDocument(req: Request, res: Response) {
     const { user } = res.locals;
     const document: createDocumentData = req.body;
 
-    await documentService.createDocument(user.id, document);
-    res.status(201); // created
+    await documentService.createDocument(user, document);
+    res.sendStatus(201); // created
 }
