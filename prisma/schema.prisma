@@ -86,8 +86,8 @@ model Document {
   userId              Int
   type                String
   fullName            String
-  issueDate           DateTime
-  expirationDate      DateTime
+  issueDate           String
+  expirationDate      String
   registrationNumber  String
   issuingBody         String          
   user                User            @relation(fields: [userId], references: [id])
