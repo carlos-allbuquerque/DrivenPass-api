@@ -6,6 +6,12 @@ export async function createDocument(
   document: createDocumentData
 ) {
   return await prisma.document.create({
-    data: { ...document, userId },
+    data: { ...document, userId }
+  });
+}
+
+export async function getAll(userId: number) {
+  return await prisma.document.findMany({
+    where: { userId }
   });
 }

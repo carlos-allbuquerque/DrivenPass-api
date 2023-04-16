@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createDocument } from "../controllers/documentController.js";
+import * as documentController from "../controllers/documentController.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import { documetSchema } from "../schemas/documentSchema.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
@@ -11,7 +11,8 @@ documentRouter.use(validateToken);
 documentRouter.post(
   "/documents",
   validateSchemaMiddleware(documetSchema),
-  createDocument
+  documentController.createDocument
 );
+documentRouter.get("/documents", documentController.getAll);
 
 export default documentRouter;
