@@ -11,7 +11,7 @@
 
 ##  📋 <b>Descrição</b>
 
-O DrivenPass é um projeto de desenvolvimento de uma API back-end que visa facilitar a vida dos usuários na gestão de suas senhas. Com o DrivenPass, os usuários não precisam mais memorizar várias senhas diferentes para diferentes sites ou aplicativos. Em vez disso, eles podem armazenar suas senhas em um único local seguro e acessá-las com apenas uma senha mestra.
+O DrivenPass é o 19º projeto do bootcamp Full Stack da Driven Education. O projeto se trata do desenvolvimento de uma API de gerenciamento de senhas, cartões e informações sensíveis.
 
 ***
 
