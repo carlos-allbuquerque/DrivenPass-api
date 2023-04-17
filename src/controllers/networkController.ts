@@ -18,7 +18,7 @@ export async function getAllUserNetworks(req: Request, res: Response) {
 
 export async function getNetwork(req: Request, res: Response) {
   const { user } = res.locals;
-  const networkId = parseInt(req.params.networkId);
+  const networkId = parseInt(req.params.id);
   if (isNaN(networkId)) {
     res.sendStatus(422); // unprocessable entity
   }
@@ -29,7 +29,7 @@ export async function getNetwork(req: Request, res: Response) {
 
 export async function removeNetwork(req: Request, res: Response) {
   const { user } = res.locals;
-  const networkId = parseInt(req.params.networkId);
+  const networkId = parseInt(req.params.id);
   if (isNaN(networkId)) {
     res.sendStatus(422); // unprocessable entity
   }

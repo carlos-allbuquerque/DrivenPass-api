@@ -1,10 +1,5 @@
 import { Router } from "express";
-import {
-  createNetwork,
-  getAllUserNetworks,
-  getNetwork,
-  removeNetwork
-} from "../controllers/networkController.js";
+import * as networkController from "../controllers/networkController.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import { networkSchema } from "../schemas/networkSchema.js";
@@ -16,10 +11,10 @@ networkRouter.use(validateToken);
 networkRouter.post(
   "/networks",
   validateSchemaMiddleware(networkSchema),
-  createNetwork
+  networkController.createNetwork
 );
-networkRouter.get("/networks", getAllUserNetworks);
-networkRouter.get("/networks/:networkId", getNetwork);
-networkRouter.delete("/networks/:networkId", removeNetwork);
+networkRouter.get("/networks", networkController.getAllUserNetworks);
+networkRouter.get("/networks/:id", networkController.getNetwork);
+networkRouter.delete("/networks/:id", networkController.removeNetwork);
 
 export default networkRouter;

@@ -24,7 +24,7 @@ export async function getAllUserNetworks(userId: number) {
 
 export async function getNetwork(user: User, networkId: number) {
   const network = await networkRepository.getNetwork(user.id, networkId);
-  if (!network) throw notFoundError("Network does not exist");
+  if (!network) throw notFoundError("Network doesn't exist");
 
   return network;
 }
