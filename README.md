@@ -11,7 +11,7 @@ O DrivenPass é o 19º projeto do bootcamp Full Stack da Driven Education. O pro
 ***
 
 ## ☁️ <b>Deploy</b>
-Url base do deploy do projeto no Heroku, por onde pode-se utilizar as rotas da API:<br> https://carlosalbuquerque-drivenpass.herokuapp.com/
+AS rotas do projeto podem ser acessadas pelo deploy do projeto no <a href="https://www.heroku.com/">Heroku</a>:<br> https://carlosalbuquerque-drivenpass.herokuapp.com/
 
 
 
