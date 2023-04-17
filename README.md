@@ -1,12 +1,7 @@
-# <p align = "center"> Projeto DrivenPass</p>
+# <p align = "center">DrivenPass API</p>
 
 <p align="center">
    <img height="150px" src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355895_1280.png"/>
-</p>
-
-<p align = "center">
-   <img src="https://img.shields.io/badge/author-Carlos Albuqueque-4dae71?style=flat-square" />
-   <img src="https://img.shields.io/github/languages/count/carlos-allbuquerque/projeto19-drivenpass?color=4dae71&style=flat-square" />
 </p>
 
 ##  📋 <b>Descrição</b>
@@ -15,12 +10,20 @@ O DrivenPass é o 19º projeto do bootcamp Full Stack da Driven Education. O pro
 
 ***
 
-## 💻 <b>Tecnologias e Conceitos</b>
+## ☁️ <b>Deploy</b>
+Url base do deploy do projeto no Heroku, por onde pode-se utilizar as rotas da API:<br> https://carlosalbuquerque-drivenpass.herokuapp.com/
+
+
+
+***
+
+## 💻 <b>Tecnologias</b>
 
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![JWT](https://img.shields.io/badge/JWT-gray?style=for-the-badge&logo=JSON%20web%20tokens)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 
