@@ -6,18 +6,24 @@ export async function createDocument(
   document: createDocumentData
 ) {
   return await prisma.document.create({
-    data: { ...document, userId }
+    data: { ...document, userId },
   });
 }
 
 export async function getAll(userId: number) {
   return await prisma.document.findMany({
-    where: { userId }
+    where: { userId },
   });
 }
 
 export async function getDocument(userId: number, documentId: number) {
   return await prisma.document.findFirst({
-    where: { userId, id: documentId }
+    where: { userId, id: documentId },
+  });
+}
+
+export async function removeDocument(id: number) {
+  return await prisma.document.delete({
+    where: { id }
   })
 }
