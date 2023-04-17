@@ -9,3 +9,7 @@ export async function createDocument(user: User, document: createDocumentData) {
 export async function getAll(userId: number) {
   return await documentRepository.getAll(userId);
 }
+
+export async function getDocument(userId: number, documentId: number) {
+  return await documentRepository.getDocument(userId, documentId);
+}

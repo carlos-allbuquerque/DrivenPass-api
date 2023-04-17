@@ -14,5 +14,6 @@ documentRouter.post(
   documentController.createDocument
 );
 documentRouter.get("/documents", documentController.getAll);
+documentRouter.get("/documents/:id", documentController.getDocument);
 
 export default documentRouter;

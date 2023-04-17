@@ -15,3 +15,9 @@ export async function getAll(userId: number) {
     where: { userId }
   });
 }
+
+export async function getDocument(userId: number, documentId: number) {
+  return await prisma.document.findFirst({
+    where: { userId, id: documentId }
+  })
+}
