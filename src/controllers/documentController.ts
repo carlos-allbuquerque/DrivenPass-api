@@ -21,9 +21,20 @@ export async function getDocument(req: Request, res: Response) {
   const { user } = res.locals;
   const documentId = parseInt(req.params.id);
   if (isNaN(documentId)) {
-    res.sendStatus(422);
+    res.sendStatus(422); // unprocessable entity
   }
 
   const document = await documentService.getDocument(user.id, documentId);
   res.send(document).status(200);
+}
+
+export async function removeDocument(req: Request, res: Response) {
+  const { user } = res.locals;
+  const documentId = parseInt(req.params.id);
+  if (isNaN(documentId)) {
+    res.sendStatus(422) // unprocessable entity
+  }
+
+  await documentService.removeDocument(user.id, documentId);
+  res.sendStatus(200);
 }
