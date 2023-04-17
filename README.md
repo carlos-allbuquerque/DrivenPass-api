@@ -1,6 +1,6 @@
 # <p align = "center"> Projeto DrivenPass</p>
 
-<p align="center">
+<p height="150px" align="center">
    <img src="https://cdn.pixabay.com/photo/2020/06/30/10/23/icon-5355895_1280.png"/>
 </p>
 
