@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as credentialController from "../controllers/credentialController.js";
-import { credentialSchema } from "../schemas/passwordsSchemas.js";
+import { credentialSchema } from "../schemas/credentialSchema.js";
 import { validateSchemaMiddleware } from "../middlewares/schemaMiddleware.js";
 import validateToken from "../middlewares/tokenMiddleware.js";
 
