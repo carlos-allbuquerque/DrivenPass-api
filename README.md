@@ -135,6 +135,7 @@ POST /cards (autenticada)
         "title": "lorem ipsum dolor",
         "number": "0000 0000 0000 0000",
         "cardHolderName": "LOREM I DOLOR",
+        "securityCode": "123",
         "expirationDate": "MM/YY",
         "password": "LOREM",
         "isVirtual": true | false,
