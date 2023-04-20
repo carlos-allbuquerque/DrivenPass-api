@@ -176,6 +176,7 @@ POST /documents (autenticada)
         "expirationDate": "DD/MM/YYYY",
         "registrationNumber": "000.000.00",
         "issuingBody": "República Federativa do Brasil",
+        "type": "RG | "CNH"
     }
 ```
 
