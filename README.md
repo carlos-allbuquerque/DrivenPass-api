@@ -173,11 +173,9 @@ POST /documents (autenticada)
     - body: {
         "fullName": "lorem ipsum dolor",
         "issueDate": "DD/MM/YYYY",
-        "cardHolderName": "LOREM I DOLOR",
         "expirationDate": "DD/MM/YYYY",
         "registrationNumber": "000.000.00",
         "issuingBody": "República Federativa do Brasil",
-        "type": "CREDIT" | "DEBIT" | "HIBRID"
     }
 ```
 
